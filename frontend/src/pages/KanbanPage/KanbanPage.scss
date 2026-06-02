@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+
+.kanban-page {
+  padding: 28px;
+  min-height: 100vh;
+
+  &__header { margin-bottom: 20px; }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: 4px;
+  }
+
+  &__hint { font-size: $font-size-sm; color: $color-text-muted; }
+}

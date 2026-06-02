@@ -1,0 +1,14 @@
+@use '../../styles/variables' as *;
+
+.kanban-board {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px);
+
+  &::-webkit-scrollbar { height: 6px; }
+  &::-webkit-scrollbar-track { background: $color-bg-secondary; }
+  &::-webkit-scrollbar-thumb { background: $color-border-strong; border-radius: 3px; }
+}
