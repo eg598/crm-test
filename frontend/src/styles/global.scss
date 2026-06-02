@@ -1,0 +1,61 @@
+@use 'reset';
+@use 'variables' as *;
+
+:root {
+  --color-primary: #{$color-primary};
+  --sidebar-width: #{$sidebar-width};
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &--critical { background: #fee2e2; color: $color-priority-critical; }
+  &--high { background: #ffedd5; color: $color-priority-high; }
+  &--medium { background: #fef3c7; color: $color-priority-medium; }
+  &--low { background: #dcfce7; color: $color-priority-low; }
+  &--new { background: #dbeafe; color: $color-status-new; }
+  &--in_progress { background: #ede9fe; color: $color-status-in-progress; }
+  &--waiting { background: #fef3c7; color: $color-status-waiting; }
+  &--resolved { background: #dcfce7; color: $color-status-resolved; }
+  &--closed { background: #f1f5f9; color: $color-status-closed; }
+  &--operator { background: #dbeafe; color: #1e40af; }
+  &--supervisor { background: #ede9fe; color: #5b21b6; }
+  &--admin { background: #fce7f3; color: #9d174d; }
+}
+
+.error-message {
+  color: $color-danger;
+  font-size: $font-size-sm;
+  margin-top: 4px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: $color-text-muted;
+  text-align: center;
+
+  &__icon { font-size: 40px; margin-bottom: 12px; }
+  &__text { font-size: $font-size-md; }
+}

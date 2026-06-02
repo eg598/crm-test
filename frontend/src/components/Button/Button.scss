@@ -1,0 +1,54 @@
+@use '../../styles/variables' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: $radius-md;
+  font-weight: 500;
+  transition: background-color $transition-fast, opacity $transition-fast;
+  white-space: nowrap;
+
+  &--md { padding: 7px 16px; font-size: $font-size-base; }
+  &--sm { padding: 4px 10px; font-size: $font-size-sm; }
+
+  &--primary {
+    background: $color-primary;
+    color: #fff;
+    &:hover:not(:disabled) { background: $color-primary-hover; }
+  }
+
+  &--secondary {
+    background: $color-bg;
+    color: $color-text;
+    border: 1px solid $color-border;
+    &:hover:not(:disabled) { background: $color-bg-hover; }
+  }
+
+  &--danger {
+    background: $color-danger;
+    color: #fff;
+    &:hover:not(:disabled) { background: $color-danger-hover; }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-text-secondary;
+    &:hover:not(:disabled) { background: $color-bg-hover; color: $color-text; }
+  }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: btn-spin 0.6s linear infinite;
+  }
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}

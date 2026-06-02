@@ -1,0 +1,61 @@
+@use '../../styles/variables' as *;
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+
+  &__content {
+    background: $color-bg;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 32px);
+    overflow: hidden;
+
+    &--sm { width: 100%; max-width: 400px; }
+    &--md { width: 100%; max-width: 560px; }
+    &--lg { width: 100%; max-width: 760px; }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid $color-border;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  &__close {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-sm;
+    font-size: 20px;
+    color: $color-text-secondary;
+    line-height: 1;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-bg-hover; color: $color-text; }
+  }
+
+  &__body {
+    padding: 20px;
+    overflow-y: auto;
+  }
+}
