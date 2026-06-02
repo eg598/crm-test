@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+
+.dashboard-page {
+  padding: 28px;
+  max-width: 1000px;
+
+  &__header { margin-bottom: 28px; }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: 4px;
+  }
+
+  &__subtitle { color: $color-text-secondary; font-size: $font-size-base; }
+
+  &__loading { color: $color-text-muted; }
+
+  &__stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  &__section { margin-bottom: 28px; }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__section-title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-text;
+
+    &--warn { color: $color-warning; }
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-primary;
+    &:hover { text-decoration: underline; }
+  }
+
+  &__tickets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+}
