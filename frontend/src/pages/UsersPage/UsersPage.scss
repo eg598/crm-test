@@ -9,6 +9,13 @@
     justify-content: space-between;
     margin-bottom: 24px;
     gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   &__title { font-size: $font-size-xl; font-weight: 700; color: $color-text; margin-bottom: 2px; }
@@ -21,7 +28,9 @@
   border-radius: $radius-lg;
   overflow: hidden;
 
-  table { width: 100%; }
+  &__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table { width: 100%; min-width: 560px; }
 
   th {
     padding: 10px 16px;
@@ -48,6 +57,41 @@
 
   &__name { font-weight: 500; }
   &__actions { display: flex; gap: 6px; }
+}
+
+.import-result {
+  &__stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__stat {
+    font-size: $font-size-base;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+
+    &--success { background: #dcfce7; color: $color-success; }
+    &--warn    { background: #fef9c3; color: $color-warning; }
+  }
+
+  &__errors {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+
+    li {
+      font-size: $font-size-sm;
+      color: $color-danger;
+      padding: 4px 0;
+      border-bottom: 1px solid $color-border;
+      &:last-child { border-bottom: none; }
+    }
+  }
 }
 
 .user-form {

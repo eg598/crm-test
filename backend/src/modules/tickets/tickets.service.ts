@@ -257,4 +257,97 @@ export const ticketsService = {
     if (!ticket) throw createHttpError('Ticket not found', 404);
     await ticket.destroy();
   },
+
+  async importTickets(
+    dtos: Array<{
+      title?: string;
+      description?: string;
+      category?: string;
+      priority?: string;
+      status?: string;
+      deadline?: string;
+      clientEmail?: string;
+      assignedEmail?: string;
+    }>
+  ) {
+    const results = { imported: 0, skipped: 0, errors: [] as string[] };
+
+    // Early format check — catch wrong-file uploads before iterating
+    if (dtos.length > 0) {
+      const sample = dtos[0] as Record<string, unknown>;
+      const hasTicketFields = 'title' in sample || 'category' in sample || 'deadline' in sample;
+      if (!hasTicketFields) {
+        results.skipped = dtos.length;
+        results.errors.push(
+          'Wrong file format: expected objects with at least a "title" field. ' +
+          'Did you upload a users file by mistake? Use docs/sample-tickets-100.json for ticket import.'
+        );
+        return results;
+      }
+    }
+
+    // Pre-load lookup maps — one DB round-trip for all emails
+    const allClients = await Client.findAll({ attributes: ['id', 'email'] });
+    const clientMap = new Map(
+      allClients.filter((c) => c.email).map((c) => [c.email!.toLowerCase(), c.id])
+    );
+
+    const allOperators = await User.findAll({ where: { role: 'operator' }, attributes: ['id', 'email'] });
+    const operatorMap = new Map(allOperators.map((u) => [u.email.toLowerCase(), u.id]));
+
+    const VALID_PRIORITIES = new Set(['low', 'medium', 'high', 'critical']);
+    const VALID_STATUSES   = new Set(['new', 'in_progress', 'waiting', 'resolved', 'closed']);
+
+    const toCreate: {
+      title: string; description: string | null; category: string | null;
+      priority: TicketPriority; status: TicketStatus;
+      deadline: Date | null; clientId: number | null; assignedUserId: number | null;
+    }[] = [];
+
+    for (let i = 0; i < dtos.length; i++) {
+      const dto = dtos[i];
+      const row = `Row ${i + 1}`;
+
+      if (!dto.title?.trim()) {
+        results.errors.push(`${row}: title is required`);
+        results.skipped++;
+        continue;
+      }
+
+      // Parse deadline safely — skip if the string is not a valid date
+      let deadline: Date | null = null;
+      if (dto.deadline) {
+        const d = new Date(dto.deadline);
+        if (isNaN(d.getTime())) {
+          results.errors.push(`${row}: invalid deadline format "${dto.deadline}" — skipping deadline`);
+        } else {
+          deadline = d;
+        }
+      }
+
+      toCreate.push({
+        title:          dto.title.trim(),
+        description:    dto.description?.trim() || null,
+        category:       dto.category?.trim() || null,
+        priority:       (VALID_PRIORITIES.has(dto.priority ?? '') ? dto.priority : 'medium') as TicketPriority,
+        status:         (VALID_STATUSES.has(dto.status ?? '') ? dto.status : 'new') as TicketStatus,
+        deadline,
+        clientId:       dto.clientEmail ? (clientMap.get(dto.clientEmail.toLowerCase()) ?? null) : null,
+        assignedUserId: dto.assignedEmail ? (operatorMap.get(dto.assignedEmail.toLowerCase()) ?? null) : null,
+      });
+    }
+
+    if (toCreate.length > 0) {
+      try {
+        await Ticket.bulkCreate(toCreate as Parameters<typeof Ticket.bulkCreate>[0]);
+        results.imported = toCreate.length;
+      } catch (err) {
+        const msg = (err as Error)?.message ?? 'database error';
+        results.errors.push(`Bulk insert failed: ${msg}`);
+        results.skipped += toCreate.length;
+      }
+    }
+
+    return results;
+  },
 };

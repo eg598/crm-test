@@ -8,6 +8,8 @@ export const ticketsRouter = Router();
 ticketsRouter.use(authMiddleware);
 
 ticketsRouter.get('/', ticketsController.list);
+// import must be registered before /:id to avoid Express treating 'import' as an id param
+ticketsRouter.post('/import', requireRole('supervisor', 'admin'), ticketsController.importTickets);
 ticketsRouter.get('/:id', ticketsController.getById);
 // Only supervisors create tickets (operators execute, not own tickets)
 ticketsRouter.post('/', requireRole('supervisor'), ticketsController.create);

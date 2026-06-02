@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@desk.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "name": "Super Visor",
+    "email": "supervisor@desk.com",
+    "password": "supervisor123",
+    "role": "supervisor"
+  },
+  {
+    "name": "John Operator",
+    "email": "operator1@desk.com",
+    "password": "operator123",
+    "role": "operator"
+  },
+  {
+    "name": "Jane Operator",
+    "email": "operator2@desk.com",
+    "password": "operator123",
+    "role": "operator"
+  }
+]

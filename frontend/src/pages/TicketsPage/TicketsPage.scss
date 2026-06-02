@@ -85,3 +85,39 @@
     &:hover { color: $color-danger; }
   }
 }
+
+.import-result {
+  &__stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__stat {
+    font-size: $font-size-base;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+
+    &--success { background: #dcfce7; color: $color-success; }
+    &--warn    { background: #fef9c3; color: $color-warning; }
+  }
+
+  &__errors {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+
+    li {
+      font-size: $font-size-sm;
+      color: $color-danger;
+      padding: 4px 0;
+      border-bottom: 1px solid $color-border;
+      &:last-child { border-bottom: none; }
+    }
+  }
+}

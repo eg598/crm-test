@@ -8,5 +8,41 @@
     flex: 1;
     overflow: auto;
     background: $color-bg-secondary;
+    min-width: 0;
+  }
+
+  &__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+  }
+
+  &__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 12px 16px;
+    cursor: pointer;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: $color-text;
+      border-radius: 2px;
+      transition: background $transition-fast;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__burger { display: flex; }
+
+    &__overlay { display: none; } // shown via class below
+
+    &--sidebar-open {
+      .layout__overlay { display: block; }
+    }
   }
 }

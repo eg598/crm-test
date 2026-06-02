@@ -49,4 +49,18 @@ export const usersController = {
       next(err);
     }
   }) as RequestHandler,
+
+  importUsers: (async (req, res, next) => {
+    try {
+      const users = req.body.users;
+      if (!Array.isArray(users) || users.length === 0) {
+        res.status(400).json({ message: 'Request body must contain a non-empty "users" array' });
+        return;
+      }
+      const result = await usersService.importUsers(users);
+      res.json(result);
+    } catch (err) {
+      next(err);
+    }
+  }) as RequestHandler,
 };

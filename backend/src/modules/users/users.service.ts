@@ -69,4 +69,53 @@ export const usersService = {
     if (!user) throw createHttpError('User not found', 404);
     await user.destroy();
   },
+
+  async importUsers(users: Array<{ name: string; email: string; password: string; role?: string }>) {
+    const results = { imported: 0, skipped: 0, errors: [] as string[] };
+
+    // Early format check — catch wrong-file uploads before iterating
+    if (users.length > 0) {
+      const sample = users[0] as Record<string, unknown>;
+      const hasUserFields = 'name' in sample || 'email' in sample || 'password' in sample;
+      if (!hasUserFields) {
+        results.skipped = users.length;
+        results.errors.push(
+          'Wrong file format: expected objects with "name", "email", and "password" fields. ' +
+          'Did you upload a tickets file by mistake? Use docs/sample-users.json for user import.'
+        );
+        return results;
+      }
+    }
+
+    for (let i = 0; i < users.length; i++) {
+      const dto = users[i];
+      const row = `Row ${i + 1}`;
+      try {
+        const missing: string[] = [];
+        if (!dto.name?.trim())     missing.push('name');
+        if (!dto.email?.trim())    missing.push('email');
+        if (!dto.password?.trim()) missing.push('password');
+        if (missing.length > 0) {
+          results.errors.push(`${row}: missing required field(s): ${missing.join(', ')}`);
+          results.skipped++;
+          continue;
+        }
+        const existing = await User.findOne({ where: { email: dto.email } });
+        if (existing) {
+          results.errors.push(`${row}: email already exists — ${dto.email}`);
+          results.skipped++;
+          continue;
+        }
+        const validRoles = ['operator', 'supervisor', 'admin'];
+        const role = validRoles.includes(dto.role ?? '') ? (dto.role as UserRole) : 'operator';
+        const hashed = await hashPassword(dto.password);
+        await User.create({ name: dto.name.trim(), email: dto.email.trim(), password: hashed, role });
+        results.imported++;
+      } catch {
+        results.errors.push(`${row}: unexpected error while saving ${dto.email ?? '(no email)'}`);
+        results.skipped++;
+      }
+    }
+    return results;
+  },
 };

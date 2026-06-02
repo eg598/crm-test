@@ -59,3 +59,45 @@
   &__icon { font-size: 40px; margin-bottom: 12px; }
   &__text { font-size: $font-size-md; }
 }
+
+// ─── Global responsive ───────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  // All main page containers get narrower padding on mobile
+  .dashboard-page,
+  .tickets-page,
+  .clients-page,
+  .users-page,
+  .kanban-page,
+  .workload-page {
+    padding: 16px;
+  }
+
+  // Ticket detail sidebar moves below main content
+  .ticket-detail-page {
+    padding: 16px;
+
+    &__content {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  // Stat cards stack on very small screens
+  .dashboard-page__stats {
+    flex-direction: column;
+  }
+
+  // Ticket list single column
+  .tickets-page__list,
+  .dashboard-page__tickets {
+    grid-template-columns: 1fr;
+  }
+
+  // Kanban horizontal scroll
+  .kanban-board {
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+}

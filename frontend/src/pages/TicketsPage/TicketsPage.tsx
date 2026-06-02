@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTickets } from '../../hooks/useTickets';
@@ -9,7 +9,7 @@ import { TicketCard } from '../../components/TicketCard';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/Modal';
 import { Input } from '../../components/Input';
-import { ticketsApi } from '../../api/tickets.api';
+import { ticketsApi, ImportResult } from '../../api/tickets.api';
 import { clientsApi } from '../../api/clients.api';
 import { CreateClientDto, CreateTicketDto, Priority } from '../../types';
 import { FieldErrors, isValidEmail, notEmpty } from '../../utils/validate';
@@ -79,6 +79,12 @@ export function TicketsPage() {
   const [clientErrors, setClientErrors] = useState<ClientErrors>({});
   const [newClientSubmitting, setNewClientSubmitting] = useState(false);
 
+  // Ticket import
+  const ticketFileRef = useRef<HTMLInputElement>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<ImportResult | null>(null);
+  const [showImportResult, setShowImportResult] = useState(false);
+
   const closeCreate = () => {
     setShowCreate(false);
     setShowNewClient(false);
@@ -87,6 +93,36 @@ export function TicketsPage() {
     setNewClientForm(EMPTY_CLIENT);
     setClientErrors({});
     setServerError('');
+  };
+
+  const handleImportClick = () => ticketFileRef.current?.click();
+
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = '';
+    setImporting(true);
+    try {
+      const text = (await file.text()).replace(/^﻿/, ''); // strip UTF-8 BOM
+      let parsed: unknown;
+      try { parsed = JSON.parse(text); } catch {
+        alert('Import failed: invalid JSON. Please check the file format.');
+        return;
+      }
+      if (!Array.isArray(parsed)) {
+        alert('Import failed: the JSON file must contain an array of tickets.');
+        return;
+      }
+      const res = await ticketsApi.import(parsed);
+      setImportResult(res.data);
+      setShowImportResult(true);
+      if (res.data.imported > 0) fetchTickets(false);
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
+      alert(msg || 'Import failed. Please check the file and try again.');
+    } finally {
+      setImporting(false);
+    }
   };
 
   // ── Ticket handlers ──────────────────────────────────────────────────────
@@ -180,9 +216,16 @@ export function TicketsPage() {
           <h1 className="tickets-page__title">Tickets</h1>
           <p className="tickets-page__count">{total} total</p>
         </div>
-        {user?.role === 'supervisor' && (
-          <Button onClick={() => setShowCreate(true)}>+ New Ticket</Button>
-        )}
+        <div style={{ display: 'flex', gap: 8 }}>
+          {user?.role === 'admin' && (
+            <Button variant="secondary" isLoading={importing} onClick={handleImportClick}>
+              Import JSON
+            </Button>
+          )}
+          {user?.role === 'supervisor' && (
+            <Button onClick={() => setShowCreate(true)}>+ New Ticket</Button>
+          )}
+        </div>
       </div>
 
       <div className="tickets-page__filters">
@@ -212,6 +255,41 @@ export function TicketsPage() {
           )}
         </>
       )}
+
+      {/* Hidden ticket import file input */}
+      <input
+        ref={ticketFileRef}
+        type="file"
+        accept=".json,application/json"
+        style={{ display: 'none' }}
+        onChange={handleImportFile}
+      />
+
+      {/* Import result modal */}
+      <Modal isOpen={showImportResult} onClose={() => setShowImportResult(false)} title="Import Result" size="sm">
+        {importResult && (
+          <div className="import-result">
+            <div className="import-result__stats">
+              <span className="import-result__stat import-result__stat--success">
+                {importResult.imported} imported
+              </span>
+              {importResult.skipped > 0 && (
+                <span className="import-result__stat import-result__stat--warn">
+                  {importResult.skipped} skipped
+                </span>
+              )}
+            </div>
+            {importResult.errors.length > 0 && (
+              <ul className="import-result__errors">
+                {importResult.errors.map((e, i) => <li key={i}>{e}</li>)}
+              </ul>
+            )}
+            <div style={{ marginTop: 16, textAlign: 'right' }}>
+              <Button onClick={() => setShowImportResult(false)}>Close</Button>
+            </div>
+          </div>
+        )}
+      </Modal>
 
       {/* ── New Ticket modal ── */}
       <Modal isOpen={showCreate} onClose={closeCreate} title="New Ticket">

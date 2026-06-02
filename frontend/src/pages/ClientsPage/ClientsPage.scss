@@ -22,7 +22,9 @@
   border-radius: $radius-lg;
   overflow: hidden;
 
-  table { width: 100%; }
+  &__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table { width: 100%; min-width: 760px; }
 
   th {
     padding: 10px 16px;
@@ -34,6 +36,7 @@
     letter-spacing: 0.04em;
     background: $color-bg-secondary;
     border-bottom: 1px solid $color-border;
+    white-space: nowrap;
   }
 
   td {
@@ -48,8 +51,19 @@
   tr:hover td { background: $color-bg-hover; }
 
   &__name { font-weight: 500; }
-
   &__actions { display: flex; gap: 6px; }
+
+  &__truncate {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    &__col-address,
+    &__col-comment { display: none; }
+  }
 }
 
 .client-form {

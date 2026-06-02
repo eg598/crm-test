@@ -1,0 +1,936 @@
+[
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Billing",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-06-16T15:07:47Z"
+    },
+    {
+        "title":  "Audit logs missing",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "closed",
+        "deadline":  "2026-04-27T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Application crashes on startup",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "closed",
+        "deadline":  "2026-05-07T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Email notifications not delivered",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-09T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Password reset expires too quickly",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "waiting",
+        "deadline":  "2026-07-25T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Logout does not clear session",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Security",
+        "priority":  "medium",
+        "status":  "resolved",
+        "deadline":  "2026-04-08T15:07:47Z"
+    },
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-07-27T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Charts not refreshing in real time",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Support",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-19T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Feature request: bulk actions",
+        "description":  "First occurred after last deployment.",
+        "category":  "Feature",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-07-18T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Password reset expires too quickly",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-07-15T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Report export fails",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "UX",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-06T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Dark mode rendering issues",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "waiting",
+        "deadline":  "2026-07-15T15:07:47Z"
+    },
+    {
+        "title":  "Mobile app crash on iOS",
+        "description":  "First occurred after last deployment.",
+        "category":  "UX",
+        "priority":  "critical",
+        "status":  "new",
+        "deadline":  "2026-06-15T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "API rate limit too restrictive",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "waiting",
+        "deadline":  "2026-06-29T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Two-factor auth not working",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-06-08T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "API rate limit too restrictive",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Support",
+        "priority":  "medium",
+        "status":  "closed",
+        "deadline":  "2026-05-16T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Customer data not syncing",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-06-24T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Incorrect monthly totals",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Security",
+        "priority":  "critical",
+        "status":  "new",
+        "deadline":  "2026-06-22T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Printer integration not responding",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Bug",
+        "priority":  "critical",
+        "status":  "new",
+        "deadline":  "2026-07-20T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Feature request: bulk actions",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Integration",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-08-22T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-06-15T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Backup job fails silently",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Support",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-16T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Memory leak in worker process",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-14T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Calendar sync broken",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Integration",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-22T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "UI layout broken on mobile",
+        "description":  "First occurred after last deployment.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-10T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Third-party API broken",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Billing",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-08-23T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Profile picture upload broken",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Integration",
+        "priority":  "critical",
+        "status":  "closed",
+        "deadline":  "2026-04-20T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Data export missing fields",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Security",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-07-23T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Profile picture upload broken",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Performance",
+        "priority":  "medium",
+        "status":  "resolved",
+        "deadline":  "2026-04-03T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "File upload fails silently",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-12T15:07:47Z"
+    },
+    {
+        "title":  "Cannot access the admin panel",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-08-13T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Profile picture upload broken",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Security",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-03T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Database connection timeout",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "UX",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-06-22T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Two-factor auth not working",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Infrastructure",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-08-06T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "UI layout broken on mobile",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Integration",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-11T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "API returns 500 error",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Billing",
+        "priority":  "medium",
+        "status":  "waiting",
+        "deadline":  "2026-08-09T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Billing",
+        "priority":  "high",
+        "status":  "closed",
+        "deadline":  "2026-05-08T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Logout does not clear session",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "low",
+        "status":  "in_progress",
+        "deadline":  "2026-07-07T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Report export fails",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Support",
+        "priority":  "low",
+        "status":  "in_progress",
+        "deadline":  "2026-08-12T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Search returns wrong results",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-06-22T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Webhook delivery failing",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Integration",
+        "priority":  "low",
+        "status":  "closed",
+        "deadline":  "2026-04-09T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Data export missing fields",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-06-08T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Missing UI translations",
+        "description":  "First occurred after last deployment.",
+        "category":  "Support",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-29T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Notifications show wrong count",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-23T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Missing UI translations",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-08-28T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Customer data not syncing",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Security",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-06-10T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Permissions not applying to users",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Bug",
+        "priority":  "critical",
+        "status":  "new",
+        "deadline":  "2026-07-11T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Logout does not clear session",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-28T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Logout does not clear session",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "UX",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-29T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Infrastructure",
+        "priority":  "medium",
+        "status":  "resolved",
+        "deadline":  "2026-04-21T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Charts not refreshing in real time",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-06-18T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "File upload fails silently",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-02T15:07:47Z"
+    },
+    {
+        "title":  "Profile picture upload broken",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-18T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Printer integration not responding",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Security",
+        "priority":  "low",
+        "status":  "closed",
+        "deadline":  "2026-05-21T15:07:47Z"
+    },
+    {
+        "title":  "Printer integration not responding",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Security",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-10T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Incorrect monthly totals",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-18T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Permissions not applying to users",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-24T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Report export fails",
+        "description":  "First occurred after last deployment.",
+        "category":  "Feature",
+        "priority":  "low",
+        "status":  "resolved",
+        "deadline":  "2026-05-22T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Two-factor auth not working",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-05-10T15:07:47Z",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Memory leak in worker process",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "resolved",
+        "deadline":  "2026-04-27T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "API returns 500 error",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-06-20T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Application crashes on startup",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Feature",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-07-05T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Dashboard loads slowly",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-07-25T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Report export fails",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-05-06T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Report export fails",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Billing",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-13T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "API rate limit too restrictive",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Billing",
+        "priority":  "critical",
+        "status":  "in_progress",
+        "deadline":  "2026-06-14T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Customer data not syncing",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-12T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Customer data not syncing",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "waiting",
+        "deadline":  "2026-07-05T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Database connection timeout",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Feature",
+        "priority":  "high",
+        "status":  "closed",
+        "deadline":  "2026-05-06T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Database connection timeout",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-06-04T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Application crashes on startup",
+        "description":  "First occurred after last deployment.",
+        "category":  "Bug",
+        "priority":  "critical",
+        "status":  "new",
+        "deadline":  "2026-06-29T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "SSL certificate renewal needed",
+        "description":  "Affects production environment. Please provide ETA.",
+        "category":  "Integration",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-08-08T15:07:47Z",
+        "clientEmail":  "tom@acme.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Dashboard loads slowly",
+        "description":  "First occurred after last deployment.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-25T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Password reset expires too quickly",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "low",
+        "status":  "new",
+        "deadline":  "2026-08-26T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "File upload fails silently",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Performance",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-07-01T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Cannot access the admin panel",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "resolved",
+        "deadline":  "2026-04-14T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Two-factor auth not working",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-21T15:07:47Z",
+        "clientEmail":  "alice@globex.com"
+    },
+    {
+        "title":  "Printer integration not responding",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Integration",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-22T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Dashboard loads slowly",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "closed",
+        "deadline":  "2026-04-14T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Password reset expires too quickly",
+        "description":  "First occurred after last deployment.",
+        "category":  "Feature",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-06-18T15:07:47Z",
+        "clientEmail":  "bob@initech.com"
+    },
+    {
+        "title":  "Email notifications not delivered",
+        "description":  "First occurred after last deployment.",
+        "category":  "Support",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-29T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Security vulnerability reported",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Billing",
+        "priority":  "critical",
+        "status":  "waiting",
+        "deadline":  "2026-06-03T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Notifications show wrong count",
+        "description":  "Confirmed by QA. Reproduction steps are documented.",
+        "category":  "UX",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-06-22T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Incorrect monthly totals",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-08-20T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Calendar sync broken",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Integration",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-07-24T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Payment processing error",
+        "description":  "First occurred after last deployment.",
+        "category":  "Security",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-07-07T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Permissions not applying to users",
+        "description":  "Consistently reproducible on all environments.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "waiting",
+        "deadline":  "2026-08-10T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Third-party API broken",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Security",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-03T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Session expires unexpectedly",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "in_progress",
+        "deadline":  "2026-06-23T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "User cannot change password",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Integration",
+        "priority":  "critical",
+        "status":  "resolved",
+        "deadline":  "2026-05-30T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "API rate limit too restrictive",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Bug",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-13T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com"
+    },
+    {
+        "title":  "Session expires unexpectedly",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Integration",
+        "priority":  "medium",
+        "status":  "waiting",
+        "deadline":  "2026-06-29T15:07:47Z",
+        "clientEmail":  "dave@stark.com"
+    },
+    {
+        "title":  "Search returns wrong results",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Infrastructure",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-29T15:07:47Z",
+        "clientEmail":  "bob@initech.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Cannot access the admin panel",
+        "description":  "Reported by multiple users. Requires immediate investigation.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-08-06T15:07:47Z",
+        "assignedEmail":  "operator2@desk.com"
+    },
+    {
+        "title":  "Dashboard loads slowly",
+        "description":  "Regression introduced in last release. Urgent fix needed.",
+        "category":  "Billing",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-06-04T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Charts not refreshing in real time",
+        "description":  "Client escalation. SLA breach risk if not resolved within 24h.",
+        "category":  "Bug",
+        "priority":  "medium",
+        "status":  "new",
+        "deadline":  "2026-08-25T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Two-factor auth not working",
+        "description":  "Low priority. Can be addressed in the next sprint.",
+        "category":  "Feature",
+        "priority":  "critical",
+        "status":  "waiting",
+        "deadline":  "2026-07-10T15:07:47Z",
+        "clientEmail":  "tom@acme.com"
+    },
+    {
+        "title":  "Third-party API broken",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Billing",
+        "priority":  "high",
+        "status":  "resolved",
+        "deadline":  "2026-04-03T15:07:47Z",
+        "clientEmail":  "alice@globex.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "API rate limit too restrictive",
+        "description":  "Critical blocker for the upcoming release.",
+        "category":  "Performance",
+        "priority":  "high",
+        "status":  "new",
+        "deadline":  "2026-07-27T15:07:47Z",
+        "clientEmail":  "carol@umbrella.com",
+        "assignedEmail":  "operator1@desk.com"
+    },
+    {
+        "title":  "Backup job fails silently",
+        "description":  "Intermittent issue — occurs approximately once per hour.",
+        "category":  "Integration",
+        "priority":  "medium",
+        "status":  "in_progress",
+        "deadline":  "2026-08-11T15:07:47Z",
+        "clientEmail":  "dave@stark.com",
+        "assignedEmail":  "operator2@desk.com"
+    }
+]

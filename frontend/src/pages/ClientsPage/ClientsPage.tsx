@@ -6,7 +6,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Modal } from '../../components/Modal';
 import { Client, CreateClientDto } from '../../types';
-import { FieldErrors, isValidEmail, notEmpty } from '../../utils/validate';
+import { FieldErrors, isValidEmail, isValidPhone, notEmpty } from '../../utils/validate';
 import './ClientsPage.scss';
 
 type ClientErrors = FieldErrors<CreateClientDto>;
@@ -16,8 +16,9 @@ function validateClient(data: Partial<CreateClientDto>): ClientErrors {
   if (!notEmpty(data.name))          e.name          = 'Required';
   if (!notEmpty(data.contactPerson)) e.contactPerson = 'Required';
   if (!notEmpty(data.email))         e.email         = 'Required';
-  else if (!isValidEmail(data.email!)) e.email       = 'Invalid email';
+  else if (!isValidEmail(data.email!)) e.email       = 'Invalid email address';
   if (!notEmpty(data.phone))         e.phone         = 'Required';
+  else if (!isValidPhone(data.phone!)) e.phone       = 'Invalid phone format (e.g. +1-555-0101)';
   if (!notEmpty(data.address))       e.address       = 'Required';
   if (!notEmpty(data.comment))       e.comment       = 'Required';
   return e;
@@ -48,35 +49,24 @@ export function ClientsPage() {
     };
 
   const openCreate = () => {
-    setEditingClient(null);
-    setForm(EMPTY);
-    setErrors({});
-    setServerError('');
-    setShowForm(true);
+    setEditingClient(null); setForm(EMPTY); setErrors({}); setServerError(''); setShowForm(true);
   };
 
   const openEdit = (client: Client) => {
     setEditingClient(client);
     setForm({
-      name:          client.name,
-      contactPerson: client.contactPerson ?? '',
-      email:         client.email ?? '',
-      phone:         client.phone ?? '',
-      address:       client.address ?? '',
-      comment:       client.comment ?? '',
+      name: client.name, contactPerson: client.contactPerson ?? '',
+      email: client.email ?? '', phone: client.phone ?? '',
+      address: client.address ?? '', comment: client.comment ?? '',
     });
-    setErrors({});
-    setServerError('');
-    setShowForm(true);
+    setErrors({}); setServerError(''); setShowForm(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validateClient(form);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-
-    setSubmitting(true);
-    setServerError('');
+    setSubmitting(true); setServerError('');
     try {
       if (editingClient) {
         const res = await clientsApi.update(editingClient.id, form as CreateClientDto);
@@ -88,7 +78,7 @@ export function ClientsPage() {
       setShowForm(false);
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
-      setServerError(msg || 'Failed to save client');
+      setServerError(msg || 'Failed to save client. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -100,7 +90,7 @@ export function ClientsPage() {
       await clientsApi.delete(client.id);
       removeClient(client.id);
     } catch {
-      alert('Failed to delete client');
+      setServerError('Failed to delete client. Please try again.');
     }
   };
 
@@ -115,110 +105,75 @@ export function ClientsPage() {
       </div>
 
       <div className="clients-page__search">
-        <Input
-          placeholder="Search clients..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Input placeholder="Search clients..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
 
       {error && <div className="error-message">{error}</div>}
+      {serverError && !showForm && <div className="error-message" style={{ marginBottom: 12 }}>{serverError}</div>}
 
       {isLoading && clients.length === 0 ? (
         <div style={{ color: '#94a3b8' }}>Loading...</div>
       ) : (
         <div className="clients-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Phone</th>
-                {canWrite && <th>Actions</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {clients.map((client) => (
-                <tr key={client.id}>
-                  <td className="clients-table__name">{client.name}</td>
-                  <td>{client.contactPerson || '—'}</td>
-                  <td>{client.email || '—'}</td>
-                  <td>{client.phone || '—'}</td>
-                  {canWrite && (
-                    <td>
-                      <div className="clients-table__actions">
-                        <Button size="sm" variant="secondary" onClick={() => openEdit(client)}>Edit</Button>
-                        {canDelete && (
-                          <Button size="sm" variant="danger" onClick={() => handleDelete(client)}>Delete</Button>
-                        )}
-                      </div>
-                    </td>
-                  )}
+          <div className="clients-table__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th className="clients-table__col-address">Address</th>
+                  <th className="clients-table__col-comment">Comment</th>
+                  {canWrite && <th>Actions</th>}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-
+              </thead>
+              <tbody>
+                {clients.map((client) => (
+                  <tr key={client.id}>
+                    <td className="clients-table__name">{client.name}</td>
+                    <td>{client.contactPerson || '—'}</td>
+                    <td>{client.email || '—'}</td>
+                    <td>{client.phone || '—'}</td>
+                    <td className="clients-table__col-address clients-table__truncate">{client.address || '—'}</td>
+                    <td className="clients-table__col-comment clients-table__truncate">{client.comment || '—'}</td>
+                    {canWrite && (
+                      <td>
+                        <div className="clients-table__actions">
+                          <Button size="sm" variant="secondary" onClick={() => openEdit(client)}>Edit</Button>
+                          {canDelete && (
+                            <Button size="sm" variant="danger" onClick={() => handleDelete(client)}>Delete</Button>
+                          )}
+                        </div>
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           {clients.length === 0 && (
-            <div className="empty-state">
-              <div className="empty-state__text">No clients found</div>
-            </div>
+            <div className="empty-state"><div className="empty-state__text">No clients found</div></div>
           )}
         </div>
       )}
 
-      <Modal
-        isOpen={showForm}
-        onClose={() => setShowForm(false)}
-        title={editingClient ? 'Edit Client' : 'New Client'}
-      >
+      <Modal isOpen={showForm} onClose={() => setShowForm(false)} title={editingClient ? 'Edit Client' : 'New Client'}>
         <form onSubmit={handleSubmit} className="client-form" noValidate>
-          <Input
-            label="Name *"
-            value={form.name ?? ''}
-            onChange={setField('name')}
-            error={errors.name}
-            autoFocus
-          />
-          <Input
-            label="Contact Person *"
-            value={form.contactPerson ?? ''}
-            onChange={setField('contactPerson')}
-            error={errors.contactPerson}
-          />
-          <Input
-            label="Email *"
-            type="email"
-            value={form.email ?? ''}
-            onChange={setField('email')}
-            error={errors.email}
-          />
-          <Input
-            label="Phone *"
-            value={form.phone ?? ''}
-            onChange={setField('phone')}
-            error={errors.phone}
-          />
-          <Input
-            label="Address *"
-            value={form.address ?? ''}
-            onChange={setField('address')}
-            error={errors.address}
-          />
+          <Input label="Name *"           value={form.name ?? ''}          onChange={setField('name')}          error={errors.name} autoFocus />
+          <Input label="Contact Person *" value={form.contactPerson ?? ''} onChange={setField('contactPerson')} error={errors.contactPerson} />
+          <Input label="Email *"          type="email" value={form.email ?? ''} onChange={setField('email')} error={errors.email} />
+          <Input label="Phone *"          value={form.phone ?? ''}         onChange={setField('phone')}         error={errors.phone} />
+          <Input label="Address *"        value={form.address ?? ''}       onChange={setField('address')}       error={errors.address} />
           <div className="input-field">
             <label className="input-field__label">Comment *</label>
             <textarea
               className={`input-field__input ${errors.comment ? 'input-field__input--error' : ''}`}
-              value={form.comment ?? ''}
-              onChange={setField('comment')}
-              rows={2}
+              value={form.comment ?? ''} onChange={setField('comment')} rows={2}
             />
             {errors.comment && <span className="input-field__error">{errors.comment}</span>}
           </div>
-
           {serverError && <div className="error-message">{serverError}</div>}
-
           <div className="client-form__actions">
             <Button type="button" variant="secondary" onClick={() => setShowForm(false)}>Cancel</Button>
             <Button type="submit" isLoading={submitting}>{editingClient ? 'Save' : 'Create'}</Button>

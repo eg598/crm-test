@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { clientsService } from './clients.service';
-import { validateRequired, isValidEmail } from '../../utils/validate';
+import { validateRequired, isValidEmail, isValidPhone } from '../../utils/validate';
 
 const REQUIRED_CLIENT_FIELDS = (body: Record<string, unknown>) =>
   validateRequired({
@@ -43,6 +43,9 @@ export const clientsController = {
       if (!isValidEmail(String(req.body.email))) {
         res.status(400).json({ message: 'Invalid email format' }); return;
       }
+      if (!isValidPhone(String(req.body.phone))) {
+        res.status(400).json({ message: 'Invalid phone format' }); return;
+      }
       const client = await clientsService.createClient(req.body);
       res.status(201).json(client);
     } catch (err) {
@@ -56,6 +59,9 @@ export const clientsController = {
       if (missing) { res.status(400).json({ message: `${missing} is required` }); return; }
       if (!isValidEmail(String(req.body.email))) {
         res.status(400).json({ message: 'Invalid email format' }); return;
+      }
+      if (!isValidPhone(String(req.body.phone))) {
+        res.status(400).json({ message: 'Invalid phone format' }); return;
       }
       const client = await clientsService.updateClient(Number(req.params.id), req.body);
       res.json(client);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useUsers } from '../../hooks/useUsers';
 import { usersApi } from '../../api/users.api';
 import { Button } from '../../components/Button';
@@ -8,13 +8,19 @@ import { User, CreateUserDto, Role } from '../../types';
 import './UsersPage.scss';
 
 export function UsersPage() {
-  const { users, isLoading, error, addUser, updateUser, removeUser } = useUsers();
+  const { users, isLoading, error, fetchUsers, addUser, updateUser, removeUser } = useUsers();
 
   const [showForm, setShowForm] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [form, setForm] = useState<Partial<CreateUserDto>>({});
   const [formError, setFormError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  // Import state
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<{ imported: number; skipped: number; errors: string[] } | null>(null);
+  const [showImportResult, setShowImportResult] = useState(false);
 
   const openCreate = () => { setEditingUser(null); setForm({ role: 'operator' }); setFormError(''); setShowForm(true); };
   const openEdit = (u: User) => {
@@ -41,7 +47,7 @@ export function UsersPage() {
       setShowForm(false);
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
-      setFormError(msg || 'Failed to save user');
+      setFormError(msg || 'Failed to save user. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -53,7 +59,42 @@ export function UsersPage() {
       await usersApi.delete(u.id);
       removeUser(u.id);
     } catch {
-      alert('Failed to delete user');
+      alert('Failed to delete user. Please try again.');
+    }
+  };
+
+  const handleImportClick = () => fileInputRef.current?.click();
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = '';
+
+    setImporting(true);
+    try {
+      const text = (await file.text()).replace(/^﻿/, ''); // strip UTF-8 BOM
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(text);
+      } catch {
+        alert('Import failed: invalid JSON file. Please check the file format.');
+        return;
+      }
+
+      if (!Array.isArray(parsed)) {
+        alert('Import failed: the JSON file must contain an array of users.');
+        return;
+      }
+
+      const res = await usersApi.import(parsed as CreateUserDto[]);
+      setImportResult(res.data);
+      setShowImportResult(true);
+      if (res.data.imported > 0) fetchUsers();
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
+      alert(msg || 'Import failed. Please check the file format and try again.');
+    } finally {
+      setImporting(false);
     }
   };
 
@@ -64,8 +105,22 @@ export function UsersPage() {
           <h1 className="users-page__title">Users</h1>
           <p className="users-page__count">{users.length} total</p>
         </div>
-        <Button onClick={openCreate}>+ New User</Button>
+        <div className="users-page__actions">
+          <Button variant="secondary" isLoading={importing} onClick={handleImportClick}>
+            Import JSON
+          </Button>
+          <Button onClick={openCreate}>+ New User</Button>
+        </div>
       </div>
+
+      {/* Hidden file input */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,application/json"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
 
       {error && <div className="error-message">{error}</div>}
 
@@ -73,41 +128,42 @@ export function UsersPage() {
         <div style={{ color: '#94a3b8' }}>Loading...</div>
       ) : (
         <div className="users-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id}>
-                  <td className="users-table__name">{u.name}</td>
-                  <td>{u.email}</td>
-                  <td><span className={`badge badge--${u.role}`}>{u.role}</span></td>
-                  <td>{new Date(u.createdAt).toLocaleDateString()}</td>
-                  <td>
-                    <div className="users-table__actions">
-                      <Button size="sm" variant="secondary" onClick={() => openEdit(u)}>Edit</Button>
-                      <Button size="sm" variant="danger" onClick={() => handleDelete(u)}>Delete</Button>
-                    </div>
-                  </td>
+          <div className="users-table__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Created</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u.id}>
+                    <td className="users-table__name">{u.name}</td>
+                    <td>{u.email}</td>
+                    <td><span className={`badge badge--${u.role}`}>{u.role}</span></td>
+                    <td>{new Date(u.createdAt).toLocaleDateString()}</td>
+                    <td>
+                      <div className="users-table__actions">
+                        <Button size="sm" variant="secondary" onClick={() => openEdit(u)}>Edit</Button>
+                        <Button size="sm" variant="danger" onClick={() => handleDelete(u)}>Delete</Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           {users.length === 0 && (
-            <div className="empty-state">
-              <div className="empty-state__text">No users found</div>
-            </div>
+            <div className="empty-state"><div className="empty-state__text">No users found</div></div>
           )}
         </div>
       )}
 
+      {/* Create / Edit modal */}
       <Modal isOpen={showForm} onClose={() => setShowForm(false)} title={editingUser ? 'Edit User' : 'New User'}>
         <form onSubmit={handleSubmit} className="user-form">
           <Input label="Name *" value={form.name ?? ''} onChange={(e) => setForm({ ...form, name: e.target.value })} autoFocus />
@@ -136,6 +192,32 @@ export function UsersPage() {
             <Button type="submit" isLoading={submitting}>{editingUser ? 'Save' : 'Create'}</Button>
           </div>
         </form>
+      </Modal>
+
+      {/* Import result modal */}
+      <Modal isOpen={showImportResult} onClose={() => setShowImportResult(false)} title="Import Result" size="sm">
+        {importResult && (
+          <div className="import-result">
+            <div className="import-result__stats">
+              <span className="import-result__stat import-result__stat--success">
+                {importResult.imported} imported
+              </span>
+              {importResult.skipped > 0 && (
+                <span className="import-result__stat import-result__stat--warn">
+                  {importResult.skipped} skipped
+                </span>
+              )}
+            </div>
+            {importResult.errors.length > 0 && (
+              <ul className="import-result__errors">
+                {importResult.errors.map((e, i) => <li key={i}>{e}</li>)}
+              </ul>
+            )}
+            <div style={{ marginTop: 16, textAlign: 'right' }}>
+              <Button onClick={() => setShowImportResult(false)}>Close</Button>
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

@@ -1,6 +1,23 @@
 import api from './axios';
 import { Ticket, PaginatedResponse, TicketFilters, CreateTicketDto, TicketStatus, TicketComment } from '../types';
 
+export interface TicketImportRow {
+  title: string;
+  description?: string;
+  category?: string;
+  priority?: string;
+  status?: string;
+  deadline?: string;
+  clientEmail?: string;
+  assignedEmail?: string;
+}
+
+export interface ImportResult {
+  imported: number;
+  skipped: number;
+  errors: string[];
+}
+
 export const ticketsApi = {
   list: (filters: TicketFilters = {}) =>
     api.get<PaginatedResponse<Ticket>>('/tickets', { params: filters }),
@@ -28,4 +45,7 @@ export const ticketsApi = {
 
   addComment: (ticketId: number, body: string) =>
     api.post<TicketComment>(`/tickets/${ticketId}/comments`, { body }),
+
+  import: (tickets: TicketImportRow[]) =>
+    api.post<ImportResult>('/tickets/import', { tickets }),
 };

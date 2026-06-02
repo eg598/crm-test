@@ -3,15 +3,19 @@ import { useAuth } from '../../context/AuthContext';
 import './Sidebar.scss';
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard', roles: ['operator', 'supervisor', 'admin'] },
-  { path: '/tickets', label: 'Tickets', roles: ['operator', 'supervisor', 'admin'] },
-  { path: '/kanban', label: 'Kanban Board', roles: ['operator', 'supervisor', 'admin'] },
-  { path: '/workload', label: 'Operator Workload', roles: ['supervisor', 'admin'] },
-  { path: '/clients', label: 'Clients', roles: ['operator', 'supervisor', 'admin'] },
-  { path: '/users', label: 'Users', roles: ['admin'] },
+  { path: '/dashboard',  label: 'Dashboard',         roles: ['operator', 'supervisor', 'admin'] },
+  { path: '/tickets',    label: 'Tickets',            roles: ['operator', 'supervisor', 'admin'] },
+  { path: '/kanban',     label: 'Kanban Board',       roles: ['operator', 'supervisor', 'admin'] },
+  { path: '/workload',   label: 'Operator Workload',  roles: ['supervisor', 'admin'] },
+  { path: '/clients',    label: 'Clients',            roles: ['operator', 'supervisor', 'admin'] },
+  { path: '/users',      label: 'Users',              roles: ['admin'] },
 ] as const;
 
-export function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export function Sidebar({ onClose }: SidebarProps) {
   const { user, logout } = useAuth();
 
   const visibleItems = navItems.filter((item) =>
@@ -27,6 +31,7 @@ export function Sidebar() {
           <NavLink
             key={item.path}
             to={item.path}
+            onClick={onClose}
             className={({ isActive }) =>
               `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
             }

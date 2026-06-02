@@ -98,6 +98,20 @@ export const ticketsController = {
     }
   }) as RequestHandler,
 
+  importTickets: (async (req, res, next) => {
+    try {
+      const tickets = req.body.tickets;
+      if (!Array.isArray(tickets) || tickets.length === 0) {
+        res.status(400).json({ message: 'Request body must contain a non-empty "tickets" array' });
+        return;
+      }
+      const result = await ticketsService.importTickets(tickets);
+      res.json(result);
+    } catch (err) {
+      next(err);
+    }
+  }) as RequestHandler,
+
   listComments: (async (req, res, next) => {
     try {
       const comments = await commentsService.listComments(Number(req.params.id), req.user!);

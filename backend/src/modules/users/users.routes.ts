@@ -9,6 +9,7 @@ usersRouter.use(authMiddleware);
 
 usersRouter.get('/', requireRole('supervisor', 'admin'), usersController.list);
 usersRouter.get('/:id', requireRole('admin'), usersController.getById);
+usersRouter.post('/import', requireRole('admin'), usersController.importUsers);
 usersRouter.post('/', requireRole('admin'), usersController.create);
 usersRouter.put('/:id', requireRole('admin'), usersController.update);
 usersRouter.delete('/:id', requireRole('admin'), usersController.remove);
