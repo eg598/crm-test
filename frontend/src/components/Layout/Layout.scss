@@ -1,0 +1,12 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+
+  &__main {
+    flex: 1;
+    overflow: auto;
+    background: $color-bg-secondary;
+  }
+}

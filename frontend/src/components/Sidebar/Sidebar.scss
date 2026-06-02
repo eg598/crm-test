@@ -1,0 +1,86 @@
+@use '../../styles/variables' as *;
+
+.sidebar {
+  width: $sidebar-width;
+  min-height: 100vh;
+  background: $color-text;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+
+  &__brand {
+    padding: 20px 16px 16px;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__nav {
+    flex: 1;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    color: rgba(255, 255, 255, 0.7);
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    &--active {
+      background: $color-primary;
+      color: #fff;
+
+      &:hover { background: $color-primary-hover; }
+    }
+  }
+
+  &__footer {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__user {
+    margin-bottom: 10px;
+  }
+
+  &__user-name {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  &__user-role {
+    font-size: $font-size-xs;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: capitalize;
+  }
+
+  &__logout {
+    width: 100%;
+    padding: 7px 12px;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: left;
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+  }
+}

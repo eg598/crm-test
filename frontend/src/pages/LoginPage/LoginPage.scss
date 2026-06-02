@@ -1,0 +1,60 @@
+@use '../../styles/variables' as *;
+
+.login-page {
+  min-height: 100vh;
+  background: $color-bg-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  &__card {
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    padding: 40px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: $shadow-md;
+  }
+
+  &__brand {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__error {
+    padding: 10px 14px;
+    background: $color-danger-light;
+    border: 1px solid lighten($color-danger, 30%);
+    border-radius: $radius-md;
+    color: $color-danger;
+    font-size: $font-size-sm;
+  }
+
+  &__hint {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid $color-border;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: 1.8;
+  }
+}

@@ -1,0 +1,65 @@
+@use '../../styles/variables' as *;
+
+.users-page {
+  padding: 28px;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+
+  &__title { font-size: $font-size-xl; font-weight: 700; color: $color-text; margin-bottom: 2px; }
+  &__count { font-size: $font-size-sm; color: $color-text-muted; }
+}
+
+.users-table {
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  table { width: 100%; }
+
+  th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: $color-bg-secondary;
+    border-bottom: 1px solid $color-border;
+  }
+
+  td {
+    padding: 12px 16px;
+    font-size: $font-size-base;
+    color: $color-text;
+    border-bottom: 1px solid $color-border;
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: $color-bg-hover; }
+
+  &__name { font-weight: 500; }
+  &__actions { display: flex; gap: 6px; }
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid $color-border;
+  }
+}
