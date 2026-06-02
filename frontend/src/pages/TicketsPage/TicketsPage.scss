@@ -1,0 +1,87 @@
+@use '../../styles/variables' as *;
+
+.tickets-page {
+  padding: 28px;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: 2px;
+  }
+
+  &__count { font-size: $font-size-sm; color: $color-text-muted; }
+
+  &__filters { margin-bottom: 20px; }
+
+  &__loading { color: $color-text-muted; }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  &__load-more {
+    margin-top: 24px;
+    text-align: center;
+  }
+}
+
+.ticket-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid $color-border;
+  }
+
+  &__new-client {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    background: $color-bg-secondary;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    margin-top: 4px;
+  }
+
+  &__new-client-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__new-client-title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  &__new-client-cancel {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    cursor: pointer;
+    &:hover { color: $color-danger; }
+  }
+}
